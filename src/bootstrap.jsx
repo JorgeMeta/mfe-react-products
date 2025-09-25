@@ -7,7 +7,6 @@ const mount = (el) => {
   root.render(<App />);
 };
 
-// Montagem em dev mode (isolado)
 const devRoot = document.getElementById("products-dev-root");
 if (devRoot) {
   mount(devRoot);

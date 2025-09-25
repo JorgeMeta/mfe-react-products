@@ -1,5 +1,9 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
+const {
+  container: { ModuleFederationPlugin },
+} = require("webpack");
+const deps = require("./package.json").dependencies;
 
 module.exports = {
   entry: "./src/index.js",
@@ -23,14 +27,22 @@ module.exports = {
       },
       {
         test: /\.css$/i,
-        use: [
-          "style-loader", // injeta CSS no DOM
-          "css-loader", // interpreta importações CSS
-        ],
+        use: ["style-loader", "css-loader"],
       },
     ],
   },
   plugins: [
+    new ModuleFederationPlugin({
+      name: "products",
+      filename: "remoteEntry.js",
+      exposes: {
+        "./ProductsApp": "./src/App.jsx",
+      },
+      shared: {
+        react: { singleton: true },
+        "react-dom": { singleton: true },
+      },
+    }),
     new HtmlWebpackPlugin({
       template: "./public/index.html",
     }),
