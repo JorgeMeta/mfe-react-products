@@ -133,42 +133,9 @@ export default function App() {
           </p>
         )}
 
-        {/* Carrinho */}
-        {cart.length > 0 ? (
-          <div className="mt-10">
-            <h2 className="text-2xl font-semibold mb-4">Carrinho</h2>
-            <ul className="space-y-4">
-              {cart.map((item) => (
-                <li
-                  key={item.id}
-                  className="bg-white p-4 rounded-lg shadow flex items-center justify-between"
-                >
-                  <div className="flex items-center gap-4">
-                    <img
-                      src={item.img}
-                      alt={item.name}
-                      className="w-16 h-16 object-contain rounded"
-                    />
-                    <span className="font-medium">{item.name}</span>
-                  </div>
-                  <div className="flex items-center gap-6">
-                    <span className="text-gray-600">Qtd: {item.qty}</span>
-                    <span className="font-semibold">
-                      R$ {item.price * item.qty}
-                    </span>
-                  </div>
-                </li>
-              ))}
-            </ul>
-            <h3 className="text-xl font-bold mt-6">
-              Total do carrinho: R$ {total}
-            </h3>
-          </div>
-        ) : (
-          <p className="text-center text-gray-600 mt-10">
-            Seu carrinho está vazio.
-          </p>
-        )}
+        <h3 className="text-xl font-bold mt-6">
+          Total do carrinho: R$ {total}
+        </h3>
       </main>
 
       {/* Footer */}
