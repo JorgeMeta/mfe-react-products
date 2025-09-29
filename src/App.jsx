@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
+import styles from "./products.module.css";
 
 export default function App() {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Carrega produtos e carrinho
   useEffect(() => {
     Promise.all([
       fetch("http://localhost:3001/products").then((res) => res.json()),
@@ -35,7 +35,6 @@ export default function App() {
       });
   }, []);
 
-  // Atualiza item
   const updateCartItem = (itemId, newQty) => {
     fetch(`http://localhost:3001/cart/${itemId}`, {
       method: "PATCH",
@@ -44,7 +43,6 @@ export default function App() {
     }).catch((err) => console.log("Erro ao atualizar item:", err));
   };
 
-  // Adiciona ao carrinho
   const addToCart = (product) => {
     const exists = cart.find(
       (item) => item.productId.toString() === product.id.toString()
@@ -78,7 +76,6 @@ export default function App() {
     }
   };
 
-  // Total
   const total = cart.reduce(
     (acc, item) => acc + Number(item.price) * Number(item.qty),
     0
@@ -87,38 +84,32 @@ export default function App() {
   if (loading) return <p className="text-center py-10">Carregando...</p>;
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-100">
-      {/* Header */}
-      <header className="bg-gradient-to-r from-indigo-600 to-indigo-400 text-white p-6 text-center">
-        <h1 className="text-3xl font-bold mb-2">Minha Loja</h1>
-        <p className="text-lg">Produtos incríveis, preços imperdíveis!</p>
+    <div className={styles.container}>
+      <header className={styles.header}>
+        <h1>Minha Loja</h1>
+        <p>Produtos incríveis, preços imperdíveis!</p>
       </header>
 
-      {/* Main */}
-      <main className="flex-1 p-6 max-w-6xl mx-auto">
-        {/* Produtos */}
+      <main className={styles.main}>
         {products.length > 0 ? (
           <>
-            <h2 className="text-2xl font-semibold mb-4">Produtos</h2>
-            <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+            <h2>Produtos</h2>
+            <div className={styles.productsGrid}>
               {products.map((product) => (
-                <div
-                  key={product.id}
-                  className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col"
-                >
-                  <div className="h-48 bg-gray-100 flex items-center justify-center">
+                <div key={product.id} className={styles.productCard}>
+                  <div className={styles.productImageWrapper}>
                     <img
                       src={product.img}
                       alt={product.name}
-                      className="max-h-full max-w-full object-contain"
+                      className={styles.productImage}
                     />
                   </div>
-                  <div className="p-4 flex flex-col items-center text-center">
-                    <h3 className="text-lg font-medium">{product.name}</h3>
-                    <p className="text-gray-600 mb-3">R$ {product.price}</p>
+                  <div className={styles.productInfo}>
+                    <h3>{product.name}</h3>
+                    <p>R$ {product.price}</p>
                     <button
                       onClick={() => addToCart(product)}
-                      className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg"
+                      className={styles.addButton}
                     >
                       Adicionar ao carrinho
                     </button>
@@ -128,18 +119,13 @@ export default function App() {
             </div>
           </>
         ) : (
-          <p className="text-center text-gray-600 mt-10">
-            Nenhum produto disponível.
-          </p>
+          <p>Nenhum produto disponível.</p>
         )}
 
-        <h3 className="text-xl font-bold mt-6">
-          Total do carrinho: R$ {total}
-        </h3>
+        <h3 className={styles.total}>Total do carrinho: R$ {total}</h3>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white text-center py-4 text-sm">
+      <footer className={styles.footer}>
         &copy; {new Date().getFullYear()} Minha Loja
       </footer>
     </div>

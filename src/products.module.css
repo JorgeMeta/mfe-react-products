@@ -1,0 +1,108 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f3f4f6; /* bg-gray-100 */
+}
+
+.header {
+  background: linear-gradient(
+    to right,
+    #4f46e5,
+    #6366f1
+  ); /* from-indigo-600 to-indigo-400 */
+  color: white;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.header h1 {
+  font-size: 1.875rem; /* text-3xl */
+  font-weight: 700; /* font-bold */
+  margin-bottom: 0.5rem;
+}
+
+.header p {
+  font-size: 1.125rem; /* text-lg */
+}
+
+.main {
+  flex: 1;
+  padding: 1.5rem;
+  max-width: 96rem; /* max-w-6xl */
+  margin: 0 auto;
+}
+
+.productsGrid {
+  display: flex; /* flexbox para linha */
+  flex-wrap: wrap; /* permite quebrar linha se não couber */
+  gap: 1.5rem; /* espaçamento entre cards */
+  justify-content: flex-start; /* alinha os cards à esquerda */
+}
+
+.productCard {
+  flex: 1 1 15rem; /* flex-grow, flex-shrink, largura mínima */
+  max-width: 20rem; /* opcional: limitar o tamanho máximo do card */
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.productImageWrapper {
+  height: 12rem; /* h-48 */
+  background-color: #f3f4f6; /* bg-gray-100 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.productImage {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.productInfo {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.productInfo h3 {
+  font-size: 1.125rem; /* text-lg */
+  font-weight: 500; /* font-medium */
+}
+
+.productInfo p {
+  color: #4b5563; /* text-gray-600 */
+  margin-bottom: 0.75rem;
+}
+
+.addButton {
+  background-color: #4f46e5; /* bg-indigo-600 */
+  color: white;
+  padding: 0.5rem 1rem; /* px-4 py-2 */
+  border-radius: 0.5rem; /* rounded-lg */
+  cursor: pointer;
+}
+
+.addButton:hover {
+  background-color: #4338ca; /* hover:bg-indigo-700 */
+}
+
+.total {
+  margin-top: 20px;
+}
+
+.footer {
+  background-color: #111827; /* bg-gray-900 */
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.875rem; /* text-sm */
+}
